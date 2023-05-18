@@ -1,0 +1,26 @@
+<div class="autocomplete">
+  <input
+    class="app-input"
+    type="text"
+    #search
+    [placeholder]="strPlaceholder || 'Ingrese una busqueda'"
+    [formControl]="objFormControl"
+    [matAutocomplete]="auto"
+    (blur)="onBlur()"
+    
+  />
+
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-option *ngFor="let option of objOptions$ | async" [value]="option">
+      <div class="option">
+        <div class="option__icon" *ngIf="option.objIcon">
+          <span [ngClass]="option.objIcon.strCssClass"></span>
+        </div>
+        <div
+          class="option__label"
+          [innerHtml]="option.strLabel | highlight : search.value"
+        ></div>
+      </div>
+    </mat-option>
+  </mat-autocomplete>
+</div>

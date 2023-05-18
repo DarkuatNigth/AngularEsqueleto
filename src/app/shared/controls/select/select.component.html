@@ -1,0 +1,8 @@
+<div class="select app-input" [class.select_disabled]="blIsDisabled">
+  <mat-select [value]="objValor" (blur)="onBlur()"
+   [disabled]="blIsDisabled" (selectionChange)="onChanged($event)">
+    <mat-option *ngFor="let objItem of lstItem" [value]="objItem.objValor">
+      {{ objItem.strLabel }}
+    </mat-option>
+  </mat-select>
+</div>

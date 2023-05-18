@@ -1,0 +1,75 @@
+<h2>Acciones</h2>
+<app-button (click)="onToggleSpinner()"> Toggle Spinner</app-button>
+<app-button (click)="onError()"> Error</app-button>
+<app-button (click)="onSuccess()"> Success</app-button>
+
+<br><br><br>
+<h2>Formularios de Angular</h2>
+<div class="wrapper">
+  <app-spinner *ngIf="showSpinner"></app-spinner>
+<form [formGroup]="objFrom" novalidate autocomplete="off"  (ngSubmit)="onSubmit()">
+
+  <app-button (click)="onSubmit()">Submit</app-button>
+  <app-button (click)="onReset()">Resetear Formulario</app-button>
+  <app-button (click)="organizarElemento()">Organizar</app-button>
+<app-button (click)="onPatchValue()">Agregar Texto</app-button>
+<app-button (click)="onToggleDisabled()">Disabled</app-button>
+<br><br>
+
+
+  <app-form-field strLabel="Input Fernando" [blRequired]="true"
+    [strPatternError]="strRegexErrors.number"
+   [objControl]="objFrom.controls.strValorInput" [blInLine]="blInLine" >
+    <app-input formControlName="strValorInput"></app-input>
+  </app-form-field>
+
+  <app-form-field strLabel="Password" [blRequired]="true"
+  [blInLine]="blInLine"
+   [objControl]="objFrom.controls.strPasswordInput">
+    <app-password formControlName="strPasswordInput" ></app-password>
+  </app-form-field>
+
+
+  <app-form-field strLabel="Autocomplete" [blRequired]="true"
+  [blInLine]="blInLine"
+   [objControl]="objFrom.controls.strAutoComplete">
+    <app-autocomplete formControlName="strAutoComplete" [lstItem]="lstItem" ></app-autocomplete>
+  </app-form-field>
+
+  <app-form-field strLabel="Select" [blRequired]="true"
+  [blInLine]="blInLine"
+   [objControl]="objFrom.controls.objSelect">
+    <app-select formControlName="objSelect" [lstItem]="lstItem"></app-select>
+  </app-form-field>
+
+  <app-form-field strLabel="Listado de checkbox" [blRequired]="true"
+  [blInLine]="blInLine"
+   [objControl]="objFrom.controls.objCheckBoxs">
+    <app-checkboxes formControlName="objCheckBoxs"
+    [lstItem]="lstItem"></app-checkboxes>
+  </app-form-field>
+
+  <app-form-field strLabel="Listado de Radio Buttons" [blRequired]="true"
+  [blInLine]="blInLine"
+   [objControl]="objFrom.controls.objRadios">
+    <app-radios formControlName="objRadios"
+    [lstItem]="lstItem"></app-radios>
+  </app-form-field>
+
+  <app-form-field strLabel="Caja para Fecha" [blRequired]="true"
+  [blInLine]="blInLine"
+   [objControl]="objFrom.controls.objDate">
+   <app-date formControlName="objDate" strPlaceHolder="Date" ></app-date>
+  </app-form-field>
+
+  <app-form-field strLabel="Caja para Formulario de Fechas" [blRequired]="true"
+  [blInLine]="blInLine"
+   [objControl]="objFrom.controls.objDateRange">
+   <app-date-range formControlName="objDateRange" strPlaceHolder="Date" >
+
+   </app-date-range>
+  </app-form-field>
+</form>
+
+
+</div>
