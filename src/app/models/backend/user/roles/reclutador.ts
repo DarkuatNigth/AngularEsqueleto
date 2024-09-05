@@ -1,5 +1,5 @@
 export interface Reclutador{
-  strNombreCompañia:string;
+  strNombreCompania:string;
   nbCantidadEmpleados: number;
 }
 

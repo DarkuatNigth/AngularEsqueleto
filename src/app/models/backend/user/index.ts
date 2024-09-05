@@ -1,5 +1,6 @@
 import { Empleado, Reclutador } from "./roles";
 import firebase from "firebase";
+export * from './roles';
 
 export interface Usuario{
   strUid: string;

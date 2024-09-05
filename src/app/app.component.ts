@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-
+import { Store } from '@ngrx/store';
+import * as fromRoot from './store';
+import * as fromDictionaries from './store/dictionaries';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +11,12 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class AppComponent {
   title = 'ecommerce-angular-app';
 
-  constructor(private objFirestore: AngularFirestore){
+  constructor(private objStore: Store<fromRoot.objEstado>){
 
   }
 
   ngOnInit(){
-    console.log("Trayendo Datos desde Firebase :D");
-    this.objFirestore.collection('test').snapshotChanges().subscribe(lstPersona => {
-      console.log(lstPersona.map(objPersona=> objPersona.payload.doc.data()));
-    })
+    this.objStore.dispatch(new fromDictionaries.objRead());
   }
 
 }

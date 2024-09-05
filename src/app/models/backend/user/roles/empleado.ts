@@ -27,7 +27,7 @@ interface Habilidades
 
 interface Experiencia
 {
-  strNombreCompañia:string;
+  strNombreCompania:string;
   objPeriodo: Periodo;
 }
 

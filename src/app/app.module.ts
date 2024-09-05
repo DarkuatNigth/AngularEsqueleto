@@ -13,6 +13,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule, MatDateFormats, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
+import { StoreModule, StoreRootModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
+const objStoreDevTools = !environment.production ? StoreDevtoolsModule.instrument({maxAge:50}):[];
+import { objReducer, objEffects } from './store';
+
 const APP_DATE_FORMATS: MatDateFormats= {
   parse:{
     dateInput: {day:'numeric', month:'numeric', year:'numeric'}
@@ -41,7 +47,16 @@ const APP_DATE_FORMATS: MatDateFormats= {
     AngularFirestoreModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
-    NotificationModule.forRoot()
+    NotificationModule.forRoot(),
+
+    StoreModule.forRoot(objReducer,{
+      runtimeChecks:{
+        strictActionImmutability:true,
+        strictStateImmutability:true
+      }
+    }),
+    EffectsModule.forRoot(objEffects),
+    objStoreDevTools
   ],
   providers: [
     {provide:MAT_DATE_LOCALE, useValue:'en-GB'},
