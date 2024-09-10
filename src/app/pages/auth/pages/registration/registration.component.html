@@ -1,0 +1,53 @@
+<div class="app-page">
+  <div class="app-page__header">
+    <h1>Registro de Usuario</h1>
+  </div>
+
+  <form
+    [formGroup]="objFormularioRegistro"
+    (submit)="onSubmit()"
+    (keyup.enter)="onSubmit()"
+    novalidate
+    autocomplete="off"
+  >
+    <div class="app-page_content">
+      <app-form-field
+        strLabel="Correo Electronico"
+        [blRequired]="true"
+        [objControl]="objFormularioRegistro.controls.strCorreo"
+        [blInLine]="false"
+        [strPatternError]="objRegexErrors.email"
+      >
+        <app-input formControlName="strCorreo"></app-input>
+      </app-form-field>
+      <app-form-field
+        strLabel="Clave "
+        [blRequired]="true"
+        [objControl]="objFormularioRegistro.controls.strClave"
+        [blInLine]="false"
+      >
+        <app-password formControlName="strClave"></app-password>
+      </app-form-field>
+      <app-form-field
+        strLabel="Repetir Clave "
+        [blRequired]="true"
+        [objControl]="objFormularioRegistro.controls.strClaveRepetida"
+        [blInLine]="false"
+        [strPatternError]="objRegexErrors.password"
+      >
+        <app-password formControlName="strClaveRepetida"></app-password>
+      </app-form-field>
+      <div
+        class="error"
+        [class.error_active]="objFormularioRegistro.hasError('strRepetido')"
+      >
+        Las claves no concuerdan
+      </div>
+    </div>
+
+    <div class="app-page__footer">
+      <app-button objType="submit"> Enviar</app-button>
+    </div>
+  </form>
+  <app-spinner *ngIf="blCargando$ | async" ></app-spinner>
+</div>

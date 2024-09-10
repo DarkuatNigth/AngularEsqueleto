@@ -1,0 +1,35 @@
+<div class="app-page">
+  <div class="app-page__header">
+    <h1>Login</h1>
+  </div>
+  <form [formGroup]="objFormulario"  autocomplete="off"
+  (submit)="onSubmit()" (keyup.enter)="onSubmit()">
+    <div class="app-page__content">
+
+      <app-form-field
+        strLabel="Correo Electronico"
+        [blRequired]="true"
+        [objControl]="objFormulario.controls.strCorreo"
+        [blInLine]="false"
+        [strPatternError]="objRegexError.email"
+      >
+        <app-input formControlName="strCorreo"></app-input>
+      </app-form-field>
+      <app-form-field
+        strLabel="Clave "
+        [blRequired]="true"
+        [objControl]="objFormulario.controls.strClave"
+        [blInLine]="false"
+        [strPatternError]="objRegexError.password"
+      >
+      <app-password formControlName="strClave"></app-password>
+    </app-form-field>
+    </div>
+
+    <app-button objType="submit">Iniciar Sesion</app-button>
+    <div class="app-page__footer">
+
+    </div>
+  </form>
+  <app-spinner *ngIf="blCargando$ | async"></app-spinner>
+</div>

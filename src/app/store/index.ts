@@ -15,5 +15,6 @@ export const objReducer: ActionReducerMap<objEstado>= {
 
 
 export const objEffects =[
-  fromDiccionarios.DiccionariosEffects
+  fromDiccionarios.DiccionariosEffects,
+  fromUsuario.fnEffectsUsuario
 ]

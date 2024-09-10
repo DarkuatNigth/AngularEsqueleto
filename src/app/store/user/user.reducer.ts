@@ -17,8 +17,24 @@ const objEstadoUsuario: EstadoUsuario = {
 
 export function fnReducer(objEstado = objEstadoUsuario, objAcciones: fromActions.All | any): EstadoUsuario{
   switch(objAcciones.type){
+    //Init
+    case fromActions.objTipos.INIT:{
+      return{...objEstado, blLoading: true};
+    }
+    case fromActions.objTipos.INIT_AUTHORIZED:{
+      return{...objEstado,objEntity:objAcciones.objUsuario,strUid:objAcciones.strUid, blLoading: true};
+    }
+    case fromActions.objTipos.INIT_UNAUTHORIZED:{
+      return{...objEstado, blLoading: false, objEntity:null, strError:null};
+    }
+    case fromActions.objTipos.INIT_ERROR:{
+      return{...objEstado, strError:objAcciones.strError,blLoading: true};
+    }
     // Sign In o Login
     case fromActions.objTipos.SIGN_IN_EMAIL: {
+      //console.log(objEstado);
+
+      console.log(objAcciones);
       return {...objEstado, blLoading:true}
     }
     case fromActions.objTipos.SIGN_IN_EMAIL_SUCCESS: {
@@ -30,6 +46,9 @@ export function fnReducer(objEstado = objEstadoUsuario, objAcciones: fromActions
 
     // Sign Up o Registro de sesion Usuario
     case fromActions.objTipos.SIGN_UP_EMAIL: {
+      //console.log(objEstado);
+
+      //console.log(objAcciones);
       return {...objEstado, blLoading:true}
     }
     case fromActions.objTipos.SIGN_UP_EMAIL_SUCCESS: {

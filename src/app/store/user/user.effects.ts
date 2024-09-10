@@ -37,14 +37,17 @@ export class fnEffectsUsuario
           from(this.objAfAuth.createUserWithEmailAndPassword(objCredenciales.strCorreo,objCredenciales.strPassword)
         ).pipe(
             tap(()=> {
+              console.log(objCredenciales);
+              console.log(
+                  environment.actionCodeSettings);
               firebase.auth().currentUser?.sendEmailVerification(
                 environment.actionCodeSettings
               );
             }),
-            map((objEstadoSignUp)=> new fromActions.fnSignUpEmailSuccess(objEstadoSignUp.user ? objEstadoSignUp.user.uid :'' )),
+            map((objEstadoSignUp)=> new fromActions.fnSignUpEmailSuccess(objEstadoSignUp.user ? objEstadoSignUp.user?.uid :'' )),
             catchError( objError =>{
               this.objNotificacion.error(objError.message);
-              return of(new fromActions.fnSignOutEmailError(objError.message))
+              return of(new fromActions.fnSignUpEmailError(objError.message))
             })
           )
 
@@ -65,13 +68,16 @@ export class fnEffectsUsuario
               :''}`).valueChanges()
             .pipe(
               take(1),
+              tap(()=> {
+                this.objRouter.navigate(['/']);
+              }),
               map(objUsuario => new fromActions.fnSignInEmailSuccess(objEstadoSignIn.user ? objEstadoSignIn.user.uid
                 :'',objUsuario || null))
               )
             ),
             catchError( objError =>{
               this.objNotificacion.error(objError.message);
-              return of(new fromActions.fnSignInEmailError(objError.message))
+              return of(new fromActions.fnSignInEmailError(objError.message));
             })
           )
 
@@ -81,18 +87,39 @@ export class fnEffectsUsuario
 
   );
 
-  fnSignOutEmail: Observable<objAcciones> = createEffect( ()=>
+  fnSignOut: Observable<objAcciones> = createEffect( ()=>
     this.objAcciones.pipe(
       ofType(fromActions.objTipos.SIGN_OUT_EMAIL),
       switchMap(() =>
           from(this.objAfAuth.signOut()).pipe(
-             map(() => new fromActions.fnSignOutEmailSuccess()),
+             map(() => new fromActions.fnSignOutSuccess()),
             catchError( objError =>{
-              this.objNotificacion.error(objError.message);
-              return of(new fromActions.fnSignOutEmailError(objError.message))
+              this.objNotificacion.error(objError.error.message.error.message);
+              return of(new fromActions.fnSignOutError(objError.message))
             })
             )
       )
+    )
+  );
+
+  fnInit: Observable<objAcciones> = createEffect( ()=>
+    this.objAcciones.pipe(
+      ofType(fromActions.objTipos.INIT),
+      switchMap(()=> this.objAfAuth.authState.pipe(
+        take(1))),
+        switchMap(objEstadoAuth => {
+          if(objEstadoAuth){
+            return this.objAfs.doc<Usuario>(`users/${objEstadoAuth.uid}`)
+            .valueChanges()//metodo que devuelve el valor de la data
+            .pipe(
+              take(1),
+              map(objUsuario => new fromActions.fnInitAutorizado(objEstadoAuth.uid, objUsuario||null)),
+              catchError(objError => of(new fromActions.fnInitError(objError.message)))
+            )
+          }else{
+            return of(new fromActions.fnInitNoAuthorizado());
+          }
+        })
     )
   );
 }
