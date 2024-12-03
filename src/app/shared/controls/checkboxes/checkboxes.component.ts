@@ -60,6 +60,7 @@ export class CheckboxesComponent implements OnInit, ControlValueAccessor {
   }
 
   private getSelected(objValor: objValor, objChecked: Boolean):objValor[]{
+    console.log('getSelected',objValor, objChecked);
     const objSelected : objValor[] = this.objValor ? [...this.objValor]:[];
     if(objChecked){
       if(!objSelected.includes(objValor)){

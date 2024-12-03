@@ -1,0 +1,27 @@
+<div class="files-upload">
+  <div class="files-upload__header">
+    <h3>Files uploading</h3>
+  </div>
+
+  <div class="files-upload__content">
+    <ng-container >
+    <div class="dropzone" appDropZone (objDropped)="onDrop($event)"
+    (objHovered)="toggleHover($event)" [class.dropzone__hovered]="bstIsHoreving">
+      <div class="dropzone__label">Deja tus archivos aqui</div>
+      <div class="dropzone__file">
+        <label class="file">
+          <input class="file__input"  [multiple]="objData.bstMultiple" type="file" (change)="onDropFile($event)"/>
+          <span class="file__label" >Seleccionar</span>
+        </label>
+      </div>
+    </div>
+    <div class="error" *ngIf="bstIsError">Seleccione un archivo
+    </div>
+  </ng-container>
+
+  </div>
+<ng-container *ngIf="lstArchivos">
+  <app-upload *ngFor="let objFile of lstArchivos" [objFile]="objFile" (objCompleto)="onUploadComplete($event)"></app-upload>
+</ng-container>
+  <div class="files-upload__header"></div>
+</div>
