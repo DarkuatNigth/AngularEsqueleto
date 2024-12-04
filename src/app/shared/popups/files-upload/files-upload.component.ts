@@ -75,6 +75,7 @@ onClose(): void {
 
 onCrop(file: File): void {
   this.objArchivoImagen = null;
+  console.log(file);
   this.lstArchivos.push(file);
 }
 }

@@ -18,10 +18,16 @@
     <div class="error" *ngIf="bstIsError">Seleccione un archivo
     </div>
   </ng-container>
+  <ng-container *ngIf="objArchivoImagen">
+    <app-cropper [objImageFile]="objArchivoImagen" (objChanged)="onCrop($event)"></app-cropper>
+  </ng-container>
+  <ng-container *ngIf="lstArchivos">
+    <app-upload *ngFor="let objFile of lstArchivos" [objFile]="objFile" (objCompleto)="onUploadComplete($event)"></app-upload>
+  </ng-container>
 
   </div>
-<ng-container *ngIf="lstArchivos">
-  <app-upload *ngFor="let objFile of lstArchivos" [objFile]="objFile" (objCompleto)="onUploadComplete($event)"></app-upload>
-</ng-container>
-  <div class="files-upload__header"></div>
+  <div class="files-upload__footer" *ngIf="!objArchivoImagen">
+    <button class="app-button" (click)="onClose()" *ngIf="!objFilesURLs.length">Cerrar</button>
+    <button class="app-button" (click)="onComplete()" *ngIf="objFilesURLs.length">Completado</button>
+  </div>
 </div>

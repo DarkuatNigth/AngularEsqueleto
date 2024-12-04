@@ -1,5 +1,6 @@
 <h2>Upload de Archivos</h2>
-<app-button appFilesUpload [bstVarios]="true" > upload</app-button>
+<app-button appFilesUpload [bstVarios]="true" (objChanged)="onFilesChanged($event)"> Subir varias Imagenes</app-button>
+<app-button appFilesUpload  [bstCrop]="true" > Subir Una Imagen</app-button>
 
 
 <h2>Acciones</h2>

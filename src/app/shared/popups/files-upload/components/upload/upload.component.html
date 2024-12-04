@@ -6,10 +6,10 @@
     [max]="100"
   >
     <div class="upload__info" *ngIf="objSnapshot$ | async as snapshot">
-      <div>{{ snapshot.bytesTransferred }} of {{ snapshot.totalBytes }}</div>
+      <div>{{ snapshot.bytesTransferred | fileSize }} of {{ snapshot.totalBytes | fileSize}}</div>
 
       <div>
-        <div *ngIf="objDownloadURL; then completed; else inProgress"></div>
+        <div *ngIf="objDownloadURL then completed else inProgress"></div>
         <ng-template #completed> </ng-template>
         <ng-template #inProgress>
           <button

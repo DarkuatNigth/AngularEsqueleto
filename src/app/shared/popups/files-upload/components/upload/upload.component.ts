@@ -42,8 +42,7 @@ export class UploadComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const safeFileName = this.objFile.name.replace(/[^a-zA-Z0-9.]/g, '_');
-    const objPath = `${this.objFile.type.split('/')[0]}/${Date.now()}_${safeFileName}`;
+    const objPath = `${this.objFile.type.split('/')[0]}/${Date.now()}_${this.objFile.name}`;
     const objStorageRef = this.objStorage.ref(objPath);
 
     this.objTask = this.objStorage.upload(objPath, this.objFile);
@@ -61,7 +60,7 @@ export class UploadComponent implements OnInit, OnDestroy {
         finalize(async () => {
           try {
             const objStorageRefObservable$ = objStorageRef.getDownloadURL();
-            this.objDownloadURL = await objStorageRefObservable$.toPromise();
+            this.objDownloadURL = await lastValueFrom(objStorageRefObservable$);
             console.log('URL de descarga:', this.objDownloadURL);
             this.objCompleto.next(this.objDownloadURL);
           } catch (error) {
