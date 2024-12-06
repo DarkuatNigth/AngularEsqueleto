@@ -18,4 +18,14 @@ export class StepperService {
     this.objEstadoStep = {...listStep[0],nbIndice:0}
   }
   constructor() { }
+
+  onNext():void{
+    const nqnIndice = this.objEstadoStep.nbIndice +1;
+    this.objEstadoStep = {...this.lstStep[nqnIndice],nbIndice: nqnIndice} ;
+  }
+
+  onPrev():void{
+    const nqnIndice = this.objEstadoStep.nbIndice -1;
+    this.objEstadoStep = {...this.lstStep[nqnIndice],nbIndice: nqnIndice} ;
+  }
 }

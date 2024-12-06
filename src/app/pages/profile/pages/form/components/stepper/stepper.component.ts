@@ -28,7 +28,27 @@ export class StepperComponent implements OnInit {
   isCompleted(nbIndice: number):boolean{
     return nbIndice < this.EstadoStepper.nbIndice;
   }
-  isLast(nbIndice: number):boolean{
+
+  isFirst():boolean{
+    return this.EstadoStepper.nbIndice === 0 ;
+  }
+
+  isLast():boolean{
     return this.EstadoStepper.nbIndice === this.lstStepper.length - 1 ;
+  }
+
+  onNext(){
+    this.objServiceStepper.onNext();
+  }
+
+  onComplete(){
+  }
+
+  onPrev(){
+    this.objServiceStepper.onPrev();
+  }
+
+  onCancel(){
+
   }
 }

@@ -1,1 +1,12 @@
-<p>form works!</p>
+<div class="app-page">
+  <div class="app-page__header"></div>
+  <div class="app-page__content">
+    <app-stepper>
+      <div [ngSwitch]="objServiceStepper.objEstadoStep?.cnoLlave">
+        <app-personal *ngSwitchCase="'personal'"></app-personal>
+        <app-professional *ngSwitchCase="'professional'"></app-professional>
+      </div>
+    </app-stepper>
+
+  </div>
+</div>

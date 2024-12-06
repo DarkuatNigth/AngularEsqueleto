@@ -1,15 +1,31 @@
 <div class="stepper">
-  <div class="stepper__header"></div>
+  <div class="stepper__header">
+    <ng-container *ngFor=" let objStep of lstStepper ; let nqnIndice = index ; let nqnUltimo = last"
+    >
+  <div class="step" [class.step__active]="isActive(nqnIndice)">
+    <div class="step__icon">
+        {{ isCompleted(nqnIndice) ? '&#10003;' : nqnIndice +1 }}
+    </div>
+    <div class="step__label">
+        {{ objStep.cnoLabel }}
+    </div>
+  </div>
+  <div class="gap" *ngIf="!nqnUltimo"></div>
+  </ng-container>
+  </div>
 
 
   <div class="stepper__content">
     <ng-content>
-      <ng-container
-      ></ng-container>
     </ng-content>
   </div>
 
 
-  <div class="stepper__footer"></div>
+  <div class="stepper__footer">
+    <button class="app-button" *ngIf="isFirst()" (click)="onCancel()"> Cancelar</button>
+    <button class="app-button" *ngIf="!isFirst()" (click)="onPrev()"> &#8592;</button>
+    <button class="app-button" *ngIf="!isLast()" (click)="onNext()"> &#8594;</button>
+    <button class="app-button" *ngIf="isLast()" (click)="onComplete()"> Completado</button>
+  </div>
 </div>
 
