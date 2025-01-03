@@ -4,7 +4,7 @@
       {{ objItem.strLabel }}
       <input type="checkbox"
       [attr.disabled]="blIsDisabled ? true : null"
-       class="checkbox__input" value="objItem.objValor"
+       class="checkbox__input" [value]="objItem.objValor"
        [checked]="isChecked(objItem.objValor)"
        (change)="onChanged(objItem.objValor, $event)"
        >

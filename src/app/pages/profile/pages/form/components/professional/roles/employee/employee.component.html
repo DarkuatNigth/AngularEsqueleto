@@ -1,0 +1,35 @@
+<form [formGroup]="objForm" novalidate autocomplete="off">
+
+  <app-form-field
+  strLabel=" Salario esperado" [blRequired]="true"[objControl]="objForm.controls.nqnSalarioEsperado"
+  >
+   <app-input  formControlName="nqnSalarioEsperado" ></app-input>
+  </app-form-field>
+  <app-form-field strLabel="Experiencia Laboral " [blRequired]="true">
+<app-experience
+[objFormParent]="objForm"
+[lstValor]="objValor ? objValor.objExperiencia : []"
+[strNombre]="'objExperiencia'"
+>
+
+</app-experience>
+  </app-form-field>
+  <app-form-field strLabel="Especialidad" [blRequired]="true"[objControl]="objForm.controls.strEspecializacion">
+
+    <app-select  formControlName="strEspecializacion"
+     [lstItem]="objControls.objEspecializacion.lstItem ? objControls.objEspecializacion.lstItem: []"
+     (objChanged)="objControls.objEspecializacion.objChanged ? objControls.objEspecializacion.objChanged():null"
+     ></app-select>
+  </app-form-field>
+  <app-form-field strLabel="Conocimientos tecnicos " [blRequired]="true"[objControl]="objForm.controls.strCualificacion">
+
+    <app-select  formControlName="strCualificacion"
+    [lstItem]="objControls.lstCalificaciones.lstItem ? objControls.lstCalificaciones.lstItem: []"></app-select>
+  </app-form-field>
+  <app-form-field strLabel="Habilidades" [blRequired]="true"[objControl]="objForm.controls.lstHabilidades">
+    <app-checkboxes  formControlName="lstHabilidades"
+    [lstItem]="objControls.lstHabilidades.lstItem ? objControls.lstHabilidades.lstItem: []"
+    ></app-checkboxes>
+  </app-form-field>
+
+</form>

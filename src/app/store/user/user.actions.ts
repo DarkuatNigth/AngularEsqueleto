@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { Usuario,CorreoContraseñaCredenciales } from "./user.models";
+import { Usuario,CorreoContraseñaCredenciales, UserCreateRequest } from "./user.models";
 
 export enum objTipos  {
   INIT = '[User] Init: Start',
@@ -19,6 +19,14 @@ export enum objTipos  {
   SIGN_OUT_EMAIL = '[Usuario] Sign Out con email:Start',
   SIGN_OUT_EMAIL_SUCCESS = '[Usuario] Sign Out con email:Success',
   SIGN_OUT_EMAIL_ERROR = '[Usuario] Sign Out con email:Error',
+
+  CREATE = '[Usuario] Create:Start',
+  CREATE_SUCCESS = '[Usuario] Create:Success',
+  CREATE_ERROR = '[Usuario] Create:Error',
+
+  UPDATE = '[Usuario] Update:Start',
+  UPDATE_SUCCESS = '[Usuario] Update:Success',
+  UPDATE_ERROR = '[Usuario] Update:Error',
 };
  //Init
  export class fnInit implements Action {
@@ -92,16 +100,51 @@ export class fnSignOutError implements Action{
   constructor(public strError: string){}
 }
 
-export type All = fnInit |
-fnInitAutorizado |
-fnInitNoAuthorizado |
-fnInitError |
-fnSignInEmail |
-fnSignInEmailSuccess |
-fnSignInEmailError |
-fnSignUpEmail |
-fnSignUpEmailSuccess |
-fnSignUpEmailError |
-fnSignOut |
-fnSignOutSuccess |
-fnSignOutError;
+export class fnCreate implements Action{
+  readonly type = objTipos.CREATE;
+ constructor(public objUser: UserCreateRequest){}
+}
+
+export class fnCreateSuccess implements Action{
+  readonly type = objTipos.CREATE_SUCCESS;
+ constructor(public objUser: Usuario){}
+}
+export class fnCreateError implements Action{
+  readonly type = objTipos.CREATE_ERROR;
+ constructor(public objUser: UserCreateRequest){}
+}
+export class fnUpdate implements Action{
+  readonly type = objTipos.UPDATE;
+ constructor(public objUser: Usuario){}
+}
+
+export class fnUpdateSuccess implements Action{
+  readonly type = objTipos.UPDATE_SUCCESS;
+ constructor(public objUser: Usuario){}
+}
+
+export class fnUpdateError implements Action{
+  readonly type = objTipos.UPDATE_ERROR;
+ constructor(public strError: string){}
+}
+
+export type All =
+fnInit
+| fnInitAutorizado
+| fnInitNoAuthorizado
+| fnInitError
+| fnSignInEmail
+| fnSignInEmailSuccess
+| fnSignInEmailError
+| fnSignUpEmail
+| fnSignUpEmailSuccess
+| fnSignUpEmailError
+| fnSignOut
+| fnSignOutSuccess
+| fnSignOutError
+| fnCreate
+| fnCreateSuccess
+| fnCreateError
+| fnUpdate
+| fnUpdateSuccess
+| fnUpdateError ;

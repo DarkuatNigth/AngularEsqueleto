@@ -69,6 +69,31 @@ export function fnReducer(objEstado = objEstadoUsuario, objAcciones: fromActions
       return {...objEstado, blLoading:false, strError:objAcciones.strError};
     }
 
+    //Create
+    case fromActions.objTipos.CREATE: {
+      return {...objEstado, blLoading:true, strError:null};
+    }
+
+    case fromActions.objTipos.CREATE_SUCCESS: {
+      return {...objEstado, blLoading:false, objEntity: objAcciones.objUsuario};
+    }
+
+    case fromActions.objTipos.CREATE_ERROR: {
+      return {...objEstado, blLoading:false, strError:objAcciones.strError};
+    }
+
+ //Update
+ case fromActions.objTipos.UPDATE: {
+  return {...objEstado, blLoading:true, strError:null};
+}
+
+case fromActions.objTipos.UPDATE_SUCCESS: {
+  return {...objEstado, blLoading:false, objEntity: objAcciones.objUsuario};
+}
+
+case fromActions.objTipos.UPDATE_ERROR: {
+  return {...objEstado, blLoading:false, strError:objAcciones.strError};
+}
     default: {
       return objEstado;
     }

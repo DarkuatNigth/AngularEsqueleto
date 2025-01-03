@@ -34,8 +34,8 @@ export class DateComponent implements OnInit, ControlValueAccessor {
   private propagateChange: any = () => {}
   private propagateTouched: any = () => {}
 
-  get objInput(): Date{
-    return this.objValor ? new Date(this.objValor) : new Date();
+  get objInput(): Date | null{
+    return this.objValor ? new Date(this.objValor) : null;
   }
   writeValue(objValor: objValor): void {
       this.objValor =objValor;
@@ -46,7 +46,7 @@ export class DateComponent implements OnInit, ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {
-      this.registerOnTouched = fn;
+      this.propagateTouched = fn;
   }
 
   setDisabledState(blIsDisabled: boolean): void {

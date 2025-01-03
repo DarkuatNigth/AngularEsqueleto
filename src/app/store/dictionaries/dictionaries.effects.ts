@@ -9,6 +9,8 @@ import { Diccionarios, objDiccionario, Item, ControlItem } from "./dictionaries.
 
 import * as fromActions from './dictionaries.actions';
 
+import * as lstJsonPaises from '@src/assets/countries.json';
+
 type objAccion = fromActions.All;
 const objDocumentoItem = (x: DocumentChangeAction<any>): Item=>{
   const objData = x.payload.doc.data();
@@ -56,15 +58,26 @@ constructor(
           this.objAfs.collection('especializacion').snapshotChanges().pipe(
             take(1),
             map( objItem => objItem.map( x=> objDocumentoItem(x))),
-          )
+          ),
+          of((lstJsonPaises as any).default.map((pais : any) =>({
+            objValor:pais.code.toUpperCase(),
+            strLabel: pais.name,
+            objIcon: {
+              strSrc: null,
+              strCssClass: 'fflag fflag-'+pais.code.toUpperCase()
+              }
+          }))
+        )
         ).pipe(
-          map(([roles, habilidades,calificaciones, especializacion ]) =>{
+          map(([roles, habilidades,calificaciones, especializacion, pais ]) =>{
             const objDiccionario : Diccionarios ={
               lstRol: agregarDiccionario(roles),
               lstHabilidades:agregarDiccionario(habilidades),
               objEspecializacion:agregarDiccionario(especializacion),
               lstCalificaciones:agregarDiccionario(calificaciones),
+              lstPaises:agregarDiccionario(pais)
             };
+            console.log('objlLectura',objDiccionario);
             return new fromActions.objReadSuccess(objDiccionario);
           }),
           catchError(strError => of(new fromActions.objReadError(strError.message)))

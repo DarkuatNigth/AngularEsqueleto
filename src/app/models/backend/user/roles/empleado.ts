@@ -1,10 +1,10 @@
 export interface Empleado
 {
-    objSpecialization:Especializacion;
-    objHabilidades:Habilidades[];
-    objCalificacion:Calificacion;
+    objSpecialization:Especializacion | null | any | undefined;
+    objHabilidades:Habilidades[] | any[];
+    objCalificacion:Calificacion | null | any | undefined;
     nbSalarioEsperado:number;
-    lstExperiencia: Experiencia[];
+    lstExperiencia: Experiencia[] | any;
 }
 
 interface Especializacion
@@ -27,11 +27,11 @@ interface Habilidades
 
 interface Experiencia
 {
-  strNombreCompania:string;
+  strNombreEmpresa: string;
   objPeriodo: Periodo;
 }
 
-interface Periodo {
-  nbFrom: number;
-  nbTo: number;
+interface Periodo{
+  nqnDesde: number;
+  nqnHasta: number;
 }

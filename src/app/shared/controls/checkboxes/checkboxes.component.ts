@@ -21,7 +21,7 @@ export class CheckboxesComponent implements OnInit, ControlValueAccessor {
   blIsDisabled!: boolean;
 
   @Input() lstItem !: ControlItem[];
-  @Output() objChange !: EventEmitter<objValor[]>;
+  @Output() objChange = new EventEmitter<objValor[]>();
   constructor() { }
 
   ngOnInit(): void {
@@ -59,15 +59,15 @@ export class CheckboxesComponent implements OnInit, ControlValueAccessor {
     return this.objValor && this.objValor.includes(objValor);
   }
 
-  private getSelected(objValor: objValor, objChecked: Boolean):objValor[]{
-    console.log('getSelected',objValor, objChecked);
+  private getSelected(Valor: objValor, objChecked: Boolean):objValor[]{
+    console.log('getSelected',Valor, objChecked);
     const objSelected : objValor[] = this.objValor ? [...this.objValor]:[];
     if(objChecked){
-      if(!objSelected.includes(objValor)){
-        objSelected.push(objValor);
+      if(!objSelected.includes(Valor)){
+        objSelected.push(Valor);
       }
       else{
-        const objIndex = objSelected.indexOf(objValor);
+        const objIndex = objSelected.indexOf(Valor);
         objSelected.splice(objIndex,1);
       }
     }

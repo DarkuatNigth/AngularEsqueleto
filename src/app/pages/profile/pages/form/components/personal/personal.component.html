@@ -1,1 +1,24 @@
-<p>personal works!</p>
+<form [formGroup]="objForm" novalidate autocomplete="off" class="personal">
+<div class="personal__photo">
+  <div class="photo">
+    <app-user-photo class="photo__img" [objFotoUrl]="objForm.controls.strFotoUrl.value" ></app-user-photo>
+    <div class="app-a" appFilesUpload [bstCrop]="true" (objChanged)="onPhotoChanged($event)" >
+      Subir imagen de perfil
+    </div>
+  </div>
+</div>
+    <app-form-field [blRequired]="true" [strLabel]="'Nombre'" [objControl]="objForm.controls.strName">
+      <app-input formControlName="strName" strPlaceHolder="Nombre"></app-input>
+    </app-form-field>
+
+    <app-form-field [blRequired]="true" [strLabel]="'Paises'" [objControl]="objForm.controls.strCodigoPais">
+      <app-input  formControlName="strCodigoPais"  strLabel="Pais" strValue="strNombre" strKey="strCodigo" strPlaceHolder="Pais" >
+
+      </app-input >
+    </app-form-field>
+
+</form>
+
+<code>
+  {{objForm.value | json}}
+</code>

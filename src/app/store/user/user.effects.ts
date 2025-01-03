@@ -122,4 +122,37 @@ export class fnEffectsUsuario
         })
     )
   );
+
+  fnCreate: Observable<objAcciones> = createEffect( ()=>
+    this.objAcciones.pipe(
+      ofType(fromActions.objTipos.CREATE),
+      map((objAccion: fromActions.fnCreate)=> objAccion.objUser),
+      withLatestFrom(this.objAfAuth.authState),
+      map(([objUser, objState]) => ({
+        ...objUser,
+        uid:objState?.uid || '',
+        email:objState?.email || '',
+        created: firebase.firestore.FieldValue.serverTimestamp()
+      })),
+      switchMap((user: Usuario)=>
+      from(this.objAfs.collection('users').doc(user.strUid).set(user))
+      .pipe(
+        tap(()=> this.objRouter.navigate(['/profile', user.strUid])),
+        map(()=> new fromActions.fnCreateSuccess(user)),
+        catchError(err => of(new fromActions.fnCreateError(err.message)))
+      ))
+    ));
+
+  fnUpdate: Observable<objAcciones> = createEffect( ()=>
+    this.objAcciones.pipe(
+      ofType(fromActions.objTipos.UPDATE),
+      map((objAccion: fromActions.fnUpdate)=> objAccion.objUser),
+      switchMap((user: Usuario)=>
+      from(this.objAfs.collection('users').doc(user.strUid).set(user))
+      .pipe(
+        tap(()=> this.objRouter.navigate(['/profile', user.strUid])),
+        map(()=> new fromActions.fnUpdateSuccess(user)),
+        catchError(err => of(new fromActions.fnUpdateError(err.message)))
+      ))
+    ));
 }

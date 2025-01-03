@@ -1,0 +1,28 @@
+<form [formGroup]="objFormParent">
+  <div [formArrayName]="strNombre" *ngIf="objFormParent.controls[strNombre] ">
+    <div class="experience"
+    *ngFor="let experiencie of getControls();  let i=index; let first= first"
+    >
+    <div [formGroupName]="i" >
+      <app-form-field strLabel="Empresa" [blRequired]="true" [objControl]="getControl(experiencie,'strNombreEmpresa')" >
+        <app-input strPlaceHolder="Ingrese el nombre de la empresa" formControlName="strNombreEmpresa"></app-input>
+
+      </app-form-field>
+
+      <app-form-field strLabel="Periodo Laboral" [blRequired]="true" [objControl]="getControl(experiencie,'objPeriodo')" >
+        <app-date-range formControlName="objPeriodo"></app-date-range>
+
+      </app-form-field>
+
+    <div class="experiences__footer">
+      <app-button *ngIf="!first" (click)="deleteExperience(i)">Eliminar</app-button>
+    </div>
+    </div>
+
+  </div>
+
+  </div>
+  <div class="experiences__footer">
+     <app-button (click)="addExperiencie()"> Agregar</app-button>
+  </div>
+</form>

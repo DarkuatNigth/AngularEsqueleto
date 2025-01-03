@@ -1,12 +1,18 @@
 <div class="app-page">
-  <div class="app-page__header"></div>
+  <div class="app-page__header">
+    <h1>{{ title }}</h1>
+  </div>
   <div class="app-page__content">
-    <app-stepper>
+    <app-stepper >
       <div [ngSwitch]="objServiceStepper.objEstadoStep?.cnoLlave">
-        <app-personal *ngSwitchCase="'personal'"></app-personal>
-        <app-professional *ngSwitchCase="'professional'"></app-professional>
+        <app-personal
+        (objChanged)="onChangedPersonal($event)"
+        *ngSwitchCase="'personal'"></app-personal>
+        <app-professional *ngSwitchCase="'professional'"
+        (objChanged)="onChangedProfesional($event)"></app-professional>
       </div>
     </app-stepper>
 
   </div>
+  <app-spinner *ngIf="obsBlCargando$  | async"></app-spinner>
 </div>

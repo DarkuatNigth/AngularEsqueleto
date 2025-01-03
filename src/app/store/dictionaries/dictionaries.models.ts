@@ -7,6 +7,7 @@ export interface Diccionarios{
   objEspecializacion: objDiccionario;
   lstCalificaciones: objDiccionario;
   lstHabilidades: objDiccionario;
+  lstPaises: objDiccionario;
 }
 
 export interface objDiccionario{

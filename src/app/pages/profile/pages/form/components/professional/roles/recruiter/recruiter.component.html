@@ -1,0 +1,19 @@
+<form [formGroup]="objForm" novalidate autocomplete="off">
+
+  <app-form-field strLabel="Nombre de Empresa" [blRequired]="true"
+   [objControl]="objForm.controls.strNombreEmpresa"
+  >
+   <app-input formControlName="strNombreEmpresa">
+
+   </app-input>
+  </app-form-field>
+
+
+  <app-form-field strLabel="Cantidad Empleados" [blRequired]="true"
+   [objControl]="objForm.controls.nqnNumeroEmpleados">
+   <app-input formControlName="nqnNumeroEmpleados">
+
+   </app-input>
+  </app-form-field>
+
+</form>

@@ -1,1 +1,19 @@
-<p>professional works!</p>
+<form [formGroup]="objForm" novalidate autocomplete="off">
+
+<app-form-field strLabel="Selecciona tu role" [blRequired]="true" [objControl]="objForm.controls.nqnRoleId">
+  <app-radios formControlName="nqnRoleId" [lstItem]="objDiccionarios ? objDiccionarios.lstRol.lstControlItem : []"></app-radios>
+</app-form-field>
+
+<app-form-field strLabel="Hablanos sobre ti!" [blRequired]="true" [objControl]="objForm.controls.strSobre">
+  <app-input formControlName="strSobre" ></app-input>
+</app-form-field>
+
+<ng-container [ngSwitch]="objForm.controls.nqnRoleId.value">
+  <app-recruiter *ngSwitchCase="'1'" [objFormParent]="objForm" strNombre="strRole" [objValor]="objValor ? objValor.strRole : objValor"></app-recruiter>
+  <app-employee *ngSwitchCase="'2'" [objFormParent]="objForm" strNombre="strRole" [objValor]="objValor ? objValor.strRole : objValor"></app-employee>
+</ng-container>
+</form>
+
+<code>
+  {{objForm.value | json}}
+</code>

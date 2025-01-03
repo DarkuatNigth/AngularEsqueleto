@@ -52,8 +52,8 @@ export class DateRangeComponent implements OnInit , ControlValueAccessor  {
     return objTo ? new Date(objTo) : new Date();
    }
 
-  writeValue(objValor: objValor): void {
-    this.objForm.patchValue(objValor || {});
+  writeValue(Valor: objValor): void {
+    this.objForm.patchValue(Valor || {});
   }
 
 
@@ -62,7 +62,7 @@ export class DateRangeComponent implements OnInit , ControlValueAccessor  {
   }
 
 registerOnTouched(fn: any): void {
-    this.registerOnTouched = fn;
+    this.propagateTouched = fn;
   }
 
 
@@ -77,13 +77,13 @@ registerOnTouched(fn: any): void {
 
 onChanged():void{
     const objValor = {...this.objForm.value};
+    console.log('date range',objValor);
     this.propagateChange(objValor);
     this.objChanged.emit(objValor);
 }
 
 onClosed():void{
   this.propagateTouched();
-  this.objClosed.emit();
 
 }
 
