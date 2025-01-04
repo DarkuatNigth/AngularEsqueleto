@@ -13,12 +13,14 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   title = 'ecommerce-angular-app';
   blEnSesion$ !: Observable<boolean>;
+  obsUsuarioEnSesion$ !: Observable<fromUsuario.Usuario>;
 
   constructor(private objStore: Store<fromRoot.objEstado>){
 
   }
 
   ngOnInit(){
+    this.obsUsuarioEnSesion$ = this.objStore.pipe(select(fromUsuario.getUsuario)) as Observable<fromUsuario.Usuario>;
     this.blEnSesion$ = this.objStore.pipe(select(fromUsuario.getEsAutorizado));
     this.objStore.dispatch(new fromUsuario.fnInit())
     this.objStore.dispatch(new fromDictionaries.objRead());

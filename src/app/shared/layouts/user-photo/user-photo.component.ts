@@ -10,7 +10,7 @@ import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 })
 export class UserPhotoComponent implements OnInit {
 
-  @Input() objFotoUrl!: string;
+  @Input() objFotoUrl!: string | null | undefined;
   constructor(
     private objSanitizer: DomSanitizer
   ) { }

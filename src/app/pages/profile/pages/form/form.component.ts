@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { StepperService } from './components/stepper/services';
-import { Observable, Subject, switchMap, takeUntil, zip } from 'rxjs';
+import { map, Observable, shareReplay, startWith, Subject, switchMap, takeUntil, zip } from 'rxjs';
 
 import { Store, select  } from  '@ngrx/store';
 import * as fromRoot from '@app/store';
@@ -25,8 +25,9 @@ export interface objProfileForm{
 })
 export class FormComponent implements OnInit, OnDestroy {
   private objDestroy = new Subject<any>();
-  obsDiccionarios$ !: Observable<fromDiccionarios.Diccionarios> | Observable<any>;
-  obsDiccionarioIsReady$  !: Observable<boolean>;
+  obsDiccionarios$ !: Observable<fromDiccionarios.Diccionarios | any> ;
+  public objDiccionario !: fromDiccionarios.Diccionarios;
+  obsDiccionarioIsReady$  !: Observable<boolean> | Observable <any>;
   obsPersonal$ !: Observable<objFormPersonal>| Observable<any>;
   obsProfessional$!: Observable<objFormProfessional>| Observable<any>;
  private obsProfile$ !: Observable<objProfileForm>| Observable<any>;
@@ -40,7 +41,8 @@ export class FormComponent implements OnInit, OnDestroy {
     private objRoute: ActivatedRoute,
     public objServiceStepper : StepperService,
     public objStore : Store<fromRoot.objEstado>
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.objUsuario = this.objRoute.snapshot.data.user;
@@ -48,13 +50,20 @@ export class FormComponent implements OnInit, OnDestroy {
     this.obsProfile$ = this.objStore.pipe(select(objFrom.getFromState));
     this.obsPersonal$ = this.objStore.pipe(select(objFrom.getPersonalForm)) as Observable<objFormPersonal>;
     this.obsProfessional$ = this.objStore.pipe(select(objFrom.getProfesionalForm)) as Observable<objFormProfessional>;
-    this.obsBlCargando$ = this.objStore.pipe(select(fromUser.getLoading)) as Observable<boolean>;
+    //this.obsBlCargando$ = this.objStore.pipe(select(fromUser.getLoading)) as Observable<boolean>;
     if(this.objUsuario){
        const form = this.objMapperService.userToForm(this.objUsuario);
        this.objStore.dispatch(new objFrom.fnSet(form));
     }
-    this.obsDiccionarios$ = this.objStore.pipe(select(fromDiccionarios.obtenerDiccionario)) as Observable<any>;
+
+    // Suscripción a los diccionarios
+    this.obsDiccionarios$ = this.objStore.pipe(
+      select(fromDiccionarios.obtenerDiccionario),
+      map((diccionario: any) => diccionario ),
+      shareReplay(1) // Compartir la última emisión
+    ) as Observable<fromDiccionarios.Diccionarios>;
     this.obsDiccionarioIsReady$ = this.objStore.pipe(select(fromDiccionarios.getIsReady)) as Observable<boolean>;
+
 
     this.objServiceStepper.init([
       {cnoLlave: 'personal', cnoLabel : 'Personal'},

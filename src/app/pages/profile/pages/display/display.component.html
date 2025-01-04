@@ -1,1 +1,19 @@
-<p>display works!</p>
+<div class="app-page" *ngIf="obsLstUsuario$ | async as objUsuario">
+
+  <div class="app-page__header">
+   {{ objUsuario.strNombre }}
+  </div>
+
+  <div class="app-page__content">
+    <div class="photo">
+      <app-user-photo [objFotoUrl]="objUsuario ? objUsuario.strFotoURL : ''">
+
+      </app-user-photo>
+    </div>
+  </div>
+
+  <div class="app-page__footer">
+    <a class="app-button" routerLink="/profile/edit"> Editar</a>
+  </div>
+</div>
+

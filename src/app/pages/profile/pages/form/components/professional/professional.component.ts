@@ -9,6 +9,7 @@ import { objRecruiterForm } from './roles/recruiter/recruiter.component';
 import { objEmployeeForm } from './roles/employee/employee.component';
 import { objExperienceForm } from './roles/employee/experience/experience.component';
 
+
 export interface objFormProfessional{
   strSobre: string | null | undefined;
   nqnRoleId: string | null | undefined;
@@ -23,19 +24,20 @@ export interface objFormProfessional{
 })
 export class ProfessionalComponent implements OnInit, OnDestroy {
   @Input() objValor!: objFormProfessional;
-  @Input() objDiccionarios!: Diccionarios | any;
+  @Input() objDiccionarios!: Diccionarios | null;
   @Output() objChanged = new EventEmitter<objFormProfessional>();
   objForm !: FormGroup;
-  lstControlItems !: ControlItem[];
   objRegex = regexErrors;
   public blContinua :boolean = false;
   private objDestroy = new Subject<any>();
   constructor(private objServiceStepper: StepperService,
     private objFb: FormBuilder,
-    private objCdr: ChangeDetectorRef) { ;
+    private objCdr: ChangeDetectorRef) {
+      console.log('ProfessionalComponent',this.objDiccionarios)
   }
 
   ngOnInit(): void {
+    console.log(this.objDiccionarios);
     let objControlItem : ControlItem[]= [{objValor:"2",strLabel: "Empleado",objIcon:undefined},
       {objValor:"1",strLabel: "Reclutador",objIcon:undefined}];
     this.objDiccionarios ={
@@ -43,10 +45,22 @@ export class ProfessionalComponent implements OnInit, OnDestroy {
           lstItem: [],
         lstControlItem: objControlItem
       },
-      objEspecializacion: null,
-      lstCalificaciones: null,
-      lstHabilidades: null,
-      lstPaises: null
+      objEspecializacion: {
+        lstItem: [],
+      lstControlItem: objControlItem
+    },
+      lstCalificaciones: {
+        lstItem: [],
+      lstControlItem: []
+    },
+      lstHabilidades: {
+        lstItem: [],
+      lstControlItem: []
+    },
+      lstPaises: {
+        lstItem: [],
+      lstControlItem: []
+    }
     }
     console.log('ngOnInit',this.objDiccionarios);
     this.objForm = this.objFb.group({
@@ -66,6 +80,7 @@ export class ProfessionalComponent implements OnInit, OnDestroy {
       this.objForm.patchValue(this.objValor);
     }
 
+    this.objCdr.detectChanges();
     this.objServiceStepper.objObsCheck$.pipe(takeUntil(this.objDestroy)).subscribe((type)=>{
       //type == 'next'
       console.log(type);

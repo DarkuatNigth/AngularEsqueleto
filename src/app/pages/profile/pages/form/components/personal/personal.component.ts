@@ -1,10 +1,14 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { StepperService } from '../stepper/services';
 import { Diccionarios } from '@app/store/dictionaries';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { markFormGroupTouched, regexErrors } from '@app/shared';
+import * as fromDiccionarios from '@app/store/dictionaries';
+import { select } from '@ngrx/store';
+import * as fromRoot from '@app/store';
+import { Store } from '@ngrx/store';
 
 export interface objFormPersonal{
   strName?: string | null;
@@ -34,8 +38,12 @@ private objDestroy = new Subject<any>();
   constructor(private objServiceStepper: StepperService,
     private objFb: FormBuilder,
     private objCdr: ChangeDetectorRef
-  ) { }
+  ) {
+  }
   ngOnInit(): void {
+
+    console.log(this.objDiccionarios);
+    // Suscripción a los diccionarios
     this.objForm = this.objFb.group({
       strName: [null,{
         updateOn:'blur', validators:[

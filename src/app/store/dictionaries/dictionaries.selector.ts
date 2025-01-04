@@ -1,7 +1,7 @@
 import { createSelector, createFeatureSelector  } from "@ngrx/store";
-import { objEstatusDiccionario } from "./dictionaries.reducer";
+import { EstatusDiccionario } from "./dictionaries.reducer";
 
-export const obtenerEstadoDiccionario = createFeatureSelector<objEstatusDiccionario>('dictionaries');
+export const obtenerEstadoDiccionario = createFeatureSelector<EstatusDiccionario>('objDiccionarios');
 
 export const obtenerDiccionario = createSelector(
    obtenerEstadoDiccionario,
@@ -18,7 +18,7 @@ export const getIsReady = createSelector(
   obtenerEstadoDiccionario,
   (state) => state.objEntidad && !state.bstCargando
 )
-
+/*
 export const obtenerRoles = createSelector(
   obtenerDiccionario,
   (state) => state?.lstRol
@@ -37,3 +37,4 @@ export const obtenerEspecializacion = createSelector(
   obtenerDiccionario,
   (state) => state?.objEspecializacion
 )
+*/

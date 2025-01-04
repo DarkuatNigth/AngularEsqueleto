@@ -9,8 +9,8 @@
 </app-form-field>
 
 <ng-container [ngSwitch]="objForm.controls.nqnRoleId.value">
-  <app-recruiter *ngSwitchCase="'1'" [objFormParent]="objForm" strNombre="strRole" [objValor]="objValor ? objValor.strRole : objValor"></app-recruiter>
-  <app-employee *ngSwitchCase="'2'" [objFormParent]="objForm" strNombre="strRole" [objValor]="objValor ? objValor.strRole : objValor"></app-employee>
+  <app-recruiter *ngSwitchCase="'2'" [objFormParent]="objForm" strNombre="strRole" [objValor]="objValor ? objValor.strRole : objValor"></app-recruiter>
+  <app-employee *ngSwitchCase="'1'" [objFormParent]="objForm" strNombre="strRole" [objValor]="objValor ? objValor.strRole : objValor"></app-employee>
 </ng-container>
 </form>
 

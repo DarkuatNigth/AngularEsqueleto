@@ -3,7 +3,7 @@ import { objProfileForm } from './form.models';
 
 export enum Types {
   SET = '[Profile] [Form] set ',
-  UPDATE = '[Profile] [Form] Uodate ',
+  UPDATE = '[Profile] [Form] Update ',
   CLEAR = '[Profile] [Form] Clear '
 }
 

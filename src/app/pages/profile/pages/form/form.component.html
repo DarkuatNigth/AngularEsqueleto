@@ -6,10 +6,14 @@
     <app-stepper >
       <div [ngSwitch]="objServiceStepper.objEstadoStep?.cnoLlave">
         <app-personal
+        [objDiccionarios]="obsDiccionarios$  | async"
         (objChanged)="onChangedPersonal($event)"
-        *ngSwitchCase="'personal'"></app-personal>
+        *ngSwitchCase="'personal'"
+        [objValor]="obsPersonal$ | async"></app-personal>
         <app-professional *ngSwitchCase="'professional'"
-        (objChanged)="onChangedProfesional($event)"></app-professional>
+        [objDiccionarios]="obsDiccionarios$  | async "
+        (objChanged)="onChangedProfesional($event)"
+        [objValor]="obsProfessional$ | async"></app-professional>
       </div>
     </app-stepper>
 

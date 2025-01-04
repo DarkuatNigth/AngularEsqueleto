@@ -21,7 +21,9 @@ export class RadiosComponent implements OnInit, ControlValueAccessor {
   @Input()  lstItem !: ControlItem[];
   @Output() objChanged = new EventEmitter<objValor>();
 
-  constructor() { }
+  constructor() {
+    console.log('checkBoxe', this.lstItem);
+   }
 
   ngOnInit(): void {
   }

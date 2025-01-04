@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Effect, Actions, ofType, createEffect } from "@ngrx/effects";
+import {  Actions, ofType, createEffect } from "@ngrx/effects";
 import { AngularFirestore, DocumentChangeAction } from "@angular/fire/firestore";
-import { Observable, of, zip } from "rxjs";
 
-import { map, switchMap,catchError,take } from "rxjs";
+import { Observable, of, zip } from 'rxjs';
+import { map, switchMap, catchError, take } from 'rxjs/operators';
 
 import { Diccionarios, objDiccionario, Item, ControlItem } from "./dictionaries.models";
 
@@ -70,7 +70,7 @@ constructor(
         )
         ).pipe(
           map(([roles, habilidades,calificaciones, especializacion, pais ]) =>{
-            const objDiccionario : Diccionarios ={
+            let objDiccionario : Diccionarios ={
               lstRol: agregarDiccionario(roles),
               lstHabilidades:agregarDiccionario(habilidades),
               objEspecializacion:agregarDiccionario(especializacion),

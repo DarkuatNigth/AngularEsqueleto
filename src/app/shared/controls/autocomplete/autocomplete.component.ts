@@ -32,7 +32,9 @@ export class AutocompleteComponent implements OnInit, OnDestroy, ControlValueAcc
 
   private objDestroy = new Subject<any>();
 
-  constructor() { }
+  constructor() {
+    console.log(this.lstItem);
+   }
 
   ngOnInit(): void {
     this.objOptions$ = this.objFormControl.valueChanges.pipe(

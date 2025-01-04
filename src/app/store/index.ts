@@ -4,7 +4,7 @@ import * as fromDiccionarios from './dictionaries';
 import * as fromUsuario from './user';
 
 export interface objEstado {
-  objDiccionarios: fromDiccionarios.objEstatusDiccionario;
+  objDiccionarios: fromDiccionarios.EstatusDiccionario;
   objUsuario: fromUsuario.EstadoUsuario;
 }
 

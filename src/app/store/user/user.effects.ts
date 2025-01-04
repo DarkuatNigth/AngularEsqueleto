@@ -104,7 +104,7 @@ export class fnEffectsUsuario
 
   fnInit: Observable<objAcciones> = createEffect( ()=>
     this.objAcciones.pipe(
-      ofType(fromActions.objTipos.INIT),
+      ofType(fromActions.objTipos.INIT_AUTHORIZED),
       switchMap(()=> this.objAfAuth.authState.pipe(
         take(1))),
         switchMap(objEstadoAuth => {

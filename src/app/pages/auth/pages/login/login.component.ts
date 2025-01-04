@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.blCargando$ = this.objStore.pipe(select(fromUsuario.getLoading));
+    this.blCargando$ = this.objStore.pipe(select(fromUsuario.getLoading)) as Observable<boolean>;
     this.objFormulario = this.objFb.group({strCorreo: [
       null,
       {

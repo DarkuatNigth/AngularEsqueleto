@@ -1,19 +1,19 @@
 import { Diccionarios, objDiccionario } from "./dictionaries.models";
 import * as fromActions from './dictionaries.actions';
 
-export interface objEstatusDiccionario {
+export interface EstatusDiccionario {
   objEntidad: Diccionarios | null;
   bstCargando: boolean | null;
   strError: string | null;
 }
 
-const initialState: objEstatusDiccionario = {
+const initialState: EstatusDiccionario = {
   objEntidad:null,
   bstCargando:null,
   strError:null
 }
 
-export function reducer(objEstado = initialState, action: fromActions.All | any): objEstatusDiccionario{
+export function reducer(objEstado = initialState, action: fromActions.All | any): EstatusDiccionario{
   switch(action.type){
     case fromActions.Types.READ:{
       return {...objEstado, bstCargando: true, strError: null};
@@ -25,7 +25,7 @@ export function reducer(objEstado = initialState, action: fromActions.All | any)
       return {...objEstado, bstCargando: false, objEntidad: null, strError: action.strError };
     }
     default:{
-      return objEstado;
+      return initialState;
     }
   }
 }
