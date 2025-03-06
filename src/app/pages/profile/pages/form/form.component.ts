@@ -13,8 +13,8 @@ import { MapperService } from './services';
 import * as objFrom from '../../store/form';
 
 export interface objProfileForm{
-  objPersonal:objFormPersonal | null ;
-  objProfessional: objFormProfessional | null;
+  objPersonal:objFormPersonal | any ;
+  objProfessional: objFormProfessional | any;
 }
 
 @Component({
@@ -25,11 +25,10 @@ export interface objProfileForm{
 })
 export class FormComponent implements OnInit, OnDestroy {
   private objDestroy = new Subject<any>();
-  obsDiccionarios$ !: Observable<fromDiccionarios.Diccionarios | any> ;
-  public objDiccionario !: fromDiccionarios.Diccionarios;
-  obsDiccionarioIsReady$  !: Observable<boolean> | Observable <any>;
-  obsPersonal$ !: Observable<objFormPersonal>| Observable<any>;
-  obsProfessional$!: Observable<objFormProfessional>| Observable<any>;
+  public obsDiccionarios$ !: Observable<fromDiccionarios.Diccionarios | any> ;
+  public obsDiccionarioIsReady$  !: Observable<boolean> | Observable <any>;
+  public obsPersonal$ !: Observable<objFormPersonal>| Observable<any>;
+  public obsProfessional$!: Observable<objFormProfessional>| Observable<any>;
  private obsProfile$ !: Observable<objProfileForm>| Observable<any>;
  private blEnEdicion !: boolean;
  obsBlCargando$ !: Observable<boolean>;
@@ -47,7 +46,7 @@ export class FormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.objUsuario = this.objRoute.snapshot.data.user;
     this.blEnEdicion = !!this.objUsuario;
-    this.obsProfile$ = this.objStore.pipe(select(objFrom.getFromState));
+    this.obsProfile$ = this.objStore.pipe(select(objFrom.getFromState)) as Observable<objProfileForm>;
     this.obsPersonal$ = this.objStore.pipe(select(objFrom.getPersonalForm)) as Observable<objFormPersonal>;
     this.obsProfessional$ = this.objStore.pipe(select(objFrom.getProfesionalForm)) as Observable<objFormProfessional>;
     //this.obsBlCargando$ = this.objStore.pipe(select(fromUser.getLoading)) as Observable<boolean>;
@@ -56,12 +55,7 @@ export class FormComponent implements OnInit, OnDestroy {
        this.objStore.dispatch(new objFrom.fnSet(form));
     }
 
-    // Suscripción a los diccionarios
-    this.obsDiccionarios$ = this.objStore.pipe(
-      select(fromDiccionarios.obtenerDiccionario),
-      map((diccionario: any) => diccionario ),
-      shareReplay(1) // Compartir la última emisión
-    ) as Observable<fromDiccionarios.Diccionarios>;
+    this.obsDiccionarios$ = this.objStore.pipe(select(fromDiccionarios.obtenerDiccionario));
     this.obsDiccionarioIsReady$ = this.objStore.pipe(select(fromDiccionarios.getIsReady)) as Observable<boolean>;
 
 

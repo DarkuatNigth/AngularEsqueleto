@@ -18,7 +18,7 @@ export const getIsReady = createSelector(
   obtenerEstadoDiccionario,
   (state) => state.objEntidad && !state.bstCargando
 )
-/*
+
 export const obtenerRoles = createSelector(
   obtenerDiccionario,
   (state) => state?.lstRol
@@ -37,4 +37,4 @@ export const obtenerEspecializacion = createSelector(
   obtenerDiccionario,
   (state) => state?.objEspecializacion
 )
-*/
+

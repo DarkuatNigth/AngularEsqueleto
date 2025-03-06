@@ -54,10 +54,10 @@ export class DateComponent implements OnInit, ControlValueAccessor {
   }
 
   onChanged(event: MatDatepickerInputEvent<Date>): void{
-    const objValor = event.value ? event.value.getTime() : new Date().getTime();
-    this.objValor = objValor;
-    this.propagateChange(objValor);
-    this.objChanged.emit(objValor);
+    const objValorFecha = event.value ? event.value.getTime() : new Date().getTime();
+    this.objValor = objValorFecha;
+    this.propagateChange(this.objValor);
+    this.objChanged.emit(this.objValor);
   }
 
   onClosed(): void{

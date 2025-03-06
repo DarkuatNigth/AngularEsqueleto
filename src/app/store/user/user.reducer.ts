@@ -34,7 +34,6 @@ export function fnReducer(objEstado = objEstadoUsuario, objAcciones: fromActions
     case fromActions.objTipos.SIGN_IN_EMAIL: {
       //console.log(objEstado);
 
-      console.log(objAcciones);
       return {...objEstado, blLoading:true}
     }
     case fromActions.objTipos.SIGN_IN_EMAIL_SUCCESS: {

@@ -16,20 +16,20 @@ const objDocumentoItem = (x: DocumentChangeAction<any>): Item=>{
   const objData = x.payload.doc.data();
   return {
     strId: x.payload.doc.id,
-    ...objData
-  }
-}
+    ...objData,
+  };
+};
 
 const objControlItem = (x:Item): ControlItem =>({
   objValor: x.strId,
   strLabel: x.strName,
   objIcon: x.objIcon
-})
+});
 
 const agregarDiccionario = (lstItem: Item[]) : objDiccionario => ({
   lstItem,
   lstControlItem: [...lstItem].map(x=> objControlItem(x)),
-})
+});
 
 @Injectable()
 export class DiccionariosEffects{
@@ -60,8 +60,8 @@ constructor(
             map( objItem => objItem.map( x=> objDocumentoItem(x))),
           ),
           of((lstJsonPaises as any).default.map((pais : any) =>({
-            objValor:pais.code.toUpperCase(),
-            strLabel: pais.name,
+            strId:pais.code.toUpperCase(),
+            strName: pais.name,
             objIcon: {
               strSrc: null,
               strCssClass: 'fflag fflag-'+pais.code.toUpperCase()

@@ -25,7 +25,7 @@ export function reducer(objEstado = initialState, action: fromActions.All | any)
       return {...objEstado, bstCargando: false, objEntidad: null, strError: action.strError };
     }
     default:{
-      return initialState;
+      return objEstado;
     }
   }
 }

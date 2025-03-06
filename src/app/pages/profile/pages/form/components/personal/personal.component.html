@@ -11,11 +11,16 @@
       <app-input formControlName="strName" strPlaceHolder="Nombre"></app-input>
     </app-form-field>
 
-    <app-form-field [blRequired]="true" [strLabel]="'Paises'" [objControl]="objForm.controls.strCodigoPais">
+    <!--<app-form-field [blRequired]="true" [strLabel]="'Paises'" [objControl]="objForm.controls.strCodigoPais">
       <app-input  formControlName="strCodigoPais"  strLabel="Pais" strValue="strNombre" strKey="strCodigo" strPlaceHolder="Pais" >
 
       </app-input >
-    </app-form-field>
+    </app-form-field>-->
+
+    <app-form-field [blRequired]="true"  [strLabel]="'Paises'" [objControl]="objForm.controls.strCodigoPais">
+      <app-autocomplete  strPlaceholder="Pais" formControlName="strCodigoPais" [lstItem]="objDiccionarios ? objDiccionarios.lstPaises.lstControlItem : []"></app-autocomplete>
+  </app-form-field>
+
 
 </form>
 

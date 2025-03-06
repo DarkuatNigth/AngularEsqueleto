@@ -33,7 +33,6 @@ export class AutocompleteComponent implements OnInit, OnDestroy, ControlValueAcc
   private objDestroy = new Subject<any>();
 
   constructor() {
-    console.log(this.lstItem);
    }
 
   ngOnInit(): void {
@@ -71,10 +70,8 @@ export class AutocompleteComponent implements OnInit, OnDestroy, ControlValueAcc
   private propagateTouched: any = () => {}
 
   writeValue(value: objValor) : void{
-    console.log(value);
      const selectedOption = this.lstItem.find(item => item.objValor === value);
-     this.objFormControl.patchValue(selectedOption ? selectedOption : value, { emitEvent: false });
-     //console.log(this.objFormControl);
+     this.objFormControl.patchValue(selectedOption /*? selectedOption : value, { emitEvent: false }*/);
   }
 
   registerOnChange(fn: any): void{

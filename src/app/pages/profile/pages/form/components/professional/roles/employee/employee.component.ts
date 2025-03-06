@@ -24,8 +24,8 @@ export class EmployeeComponent implements OnInit, OnDestroy  {
   @Input() objFormParent !: FormGroup;
   @Input() strNombre !: string;
 
-  @Input() objValor !: objEmployeeForm | objRecruiterForm  | null | undefined;
-  @Input() objDiccionarios !: Diccionarios | any;
+  @Input() objValor !: objEmployeeForm | objRecruiterForm  ;
+  @Input() objDiccionarios !: Diccionarios ;
 
   objForm !: FormGroup;
   objControls !: ControlEntities;
@@ -33,7 +33,7 @@ export class EmployeeComponent implements OnInit, OnDestroy  {
     private objFb: FormBuilder
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {/*
     let objContItemEspecializacion : ControlItem[]=[
         {objValor:"1",strLabel: "Front End",objIcon:undefined},
         {objValor:"2",strLabel: "Back End",objIcon:undefined},
@@ -66,7 +66,7 @@ export class EmployeeComponent implements OnInit, OnDestroy  {
         lstControlItem: objContItemHabilidades
       },
       lstPaises: null
-    }
+    }*/
     this.objForm = this.objFb.group({
       nqnSalarioEsperado: [null,{
             updateOn:'blur', validators:[

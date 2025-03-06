@@ -27,8 +27,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
 private objDestroy = new Subject<any>();
 
   @Input() objValor!: objFormPersonal;
-  @Input() objDiccionarios!: Diccionarios | any;
-
+  @Input() objDiccionarios!: Diccionarios | null;
   @Output() objChanged = new EventEmitter<objFormPersonal>();
 
   objForm !: FormGroup;
@@ -42,7 +41,6 @@ private objDestroy = new Subject<any>();
   }
   ngOnInit(): void {
 
-    console.log(this.objDiccionarios);
     // Suscripción a los diccionarios
     this.objForm = this.objFb.group({
       strName: [null,{

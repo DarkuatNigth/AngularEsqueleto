@@ -9,7 +9,9 @@
         [objDiccionarios]="obsDiccionarios$  | async"
         (objChanged)="onChangedPersonal($event)"
         *ngSwitchCase="'personal'"
-        [objValor]="obsPersonal$ | async"></app-personal>
+        [objValor]="obsPersonal$ | async">
+      </app-personal>
+
         <app-professional *ngSwitchCase="'professional'"
         [objDiccionarios]="obsDiccionarios$  | async "
         (objChanged)="onChangedProfesional($event)"

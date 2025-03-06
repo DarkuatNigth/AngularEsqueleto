@@ -11,9 +11,9 @@ import { objExperienceForm } from './roles/employee/experience/experience.compon
 
 
 export interface objFormProfessional{
-  strSobre: string | null | undefined;
-  nqnRoleId: string | null | undefined;
-  strRole: objEmployeeForm | objRecruiterForm | null | undefined;
+  strSobre: string | null ;
+  nqnRoleId: string | null ;
+  strRole: objEmployeeForm | objRecruiterForm | null  ;
 }
 
 @Component({
@@ -23,8 +23,8 @@ export interface objFormProfessional{
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfessionalComponent implements OnInit, OnDestroy {
-  @Input() objValor!: objFormProfessional;
-  @Input() objDiccionarios!: Diccionarios | null;
+  @Input() objValor!: objFormProfessional | any;
+  @Input() objDiccionarios!: Diccionarios ;
   @Output() objChanged = new EventEmitter<objFormProfessional>();
   objForm !: FormGroup;
   objRegex = regexErrors;
@@ -36,7 +36,7 @@ export class ProfessionalComponent implements OnInit, OnDestroy {
       console.log('ProfessionalComponent',this.objDiccionarios)
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {/*
     console.log(this.objDiccionarios);
     let objControlItem : ControlItem[]= [{objValor:"2",strLabel: "Empleado",objIcon:undefined},
       {objValor:"1",strLabel: "Reclutador",objIcon:undefined}];
@@ -61,8 +61,8 @@ export class ProfessionalComponent implements OnInit, OnDestroy {
         lstItem: [],
       lstControlItem: []
     }
-    }
-    console.log('ngOnInit',this.objDiccionarios);
+    }*/
+    console.log('ngOnInit-Professional',this.objDiccionarios);
     this.objForm = this.objFb.group({
       nqnRoleId: [null,{
         updateOn:'change', validators:[

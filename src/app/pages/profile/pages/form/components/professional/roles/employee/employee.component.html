@@ -17,18 +17,18 @@
   <app-form-field strLabel="Especialidad" [blRequired]="true"[objControl]="objForm.controls.strEspecializacion">
 
     <app-select  formControlName="strEspecializacion"
-     [lstItem]="objControls.objEspecializacion.lstItem ? objControls.objEspecializacion.lstItem: []"
+     [lstItem]="objDiccionarios ? objDiccionarios.objEspecializacion.lstControlItem : []"
      (objChanged)="objControls.objEspecializacion.objChanged ? objControls.objEspecializacion.objChanged():null"
      ></app-select>
   </app-form-field>
   <app-form-field strLabel="Conocimientos tecnicos " [blRequired]="true"[objControl]="objForm.controls.strCualificacion">
 
     <app-select  formControlName="strCualificacion"
-    [lstItem]="objControls.lstCalificaciones.lstItem ? objControls.lstCalificaciones.lstItem: []"></app-select>
+    [lstItem]="objDiccionarios ? objDiccionarios.lstCalificaciones.lstControlItem: []"></app-select>
   </app-form-field>
   <app-form-field strLabel="Habilidades" [blRequired]="true"[objControl]="objForm.controls.lstHabilidades">
     <app-checkboxes  formControlName="lstHabilidades"
-    [lstItem]="objControls.lstHabilidades.lstItem ? objControls.lstHabilidades.lstItem: []"
+    [lstItem]=" objDiccionarios? objDiccionarios.lstHabilidades.lstControlItem: []"
     ></app-checkboxes>
   </app-form-field>
 

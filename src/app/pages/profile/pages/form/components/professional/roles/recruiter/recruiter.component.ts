@@ -20,7 +20,7 @@ export class RecruiterComponent implements OnInit, OnDestroy {
   @Input() objFormParent !: FormGroup;
   @Input() strNombre !: string;
 
-  @Input() objValor !: objEmployeeForm | objRecruiterForm | null | undefined;
+  @Input() objValor !: objEmployeeForm | objRecruiterForm ;
   @Input() objDiccionarios !: Diccionarios | any;
 
   objForm !: FormGroup;
